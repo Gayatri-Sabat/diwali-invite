@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ek Diwali, Doston ke sath</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--maroon:#5a0a1a;--deep:#3a0610;--wine:#7a1226;--gold:#f2c14e;--gold2:#ffe29a;--cream:#fff4d6;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:radial-gradient(120% 60% at 50% 0,var(--wine),var(--maroon) 45%,var(--deep));background-color:var(--deep);color:var(--cream);font-family:'Nunito',system-ui,sans-serif;line-height:1.5;min-height:100vh}
+main{max-width:480px;margin:0 auto;padding:20px 18px 48px}
+h1,h2,.k{font-family:'Kalam',cursive}
+.hero{text-align:center;padding-top:8px}
+.hero h1{font-size:clamp(2.1rem,10vw,3rem);line-height:1.05;margin:18px 0 6px;color:var(--gold);font-weight:700;text-shadow:0 2px 0 var(--deep)}
+.hero p{margin:0;color:var(--gold2);font-weight:700}
+.sky{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.sky i{position:absolute;bottom:-20px;width:6px;height:6px;border-radius:50%;background:var(--gold);box-shadow:0 0 8px 2px #f2c14e88;opacity:0;animation:rise linear infinite}
+@keyframes rise{0%{transform:translateY(0) scale(.6);opacity:0}15%{opacity:.9}100%{transform:translateY(-105vh) scale(1.3);opacity:0}}
+main{position:relative;z-index:1}
+/* card fan */
+.fan{position:relative;height:210px;margin:6px auto 0;width:260px;perspective:800px}
+.pc{position:absolute;left:50%;top:10px;width:112px;height:164px;margin-left:-56px;transform-origin:50% 120%;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.pc .in{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .7s}
+.pc.flip .in{transform:rotateY(180deg)}
+.face,.back{position:absolute;inset:0;border-radius:12px;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:2px solid var(--gold)}
+.back{background:repeating-linear-gradient(45deg,var(--wine) 0 6px,#8a1830 6px 12px);display:grid;place-items:center;box-shadow:0 8px 18px #0006}
+.back::before{content:"";position:absolute;inset:6px;border:1.5px solid var(--gold);border-radius:8px}
+.face{background:var(--cream);color:var(--wine);transform:rotateY(180deg);display:grid;place-items:center;font-family:'Kalam',cursive;font-weight:700;font-size:2.6rem}
+.face small{position:absolute;top:6px;left:9px;font-size:1.1rem;line-height:1}
+.face small.b{top:auto;left:auto;bottom:6px;right:9px;transform:rotate(180deg)}
+.c1{transform:rotate(-18deg);animation:bob 4s ease-in-out infinite}
+.c2{transform:rotate(0);z-index:2;animation:bob 4s ease-in-out -1.3s infinite}
+.c3{transform:rotate(18deg);animation:bob 4s ease-in-out -2.6s infinite}
+@keyframes bob{50%{translate:0 -7px}}
+.diya{width:64px;height:auto}
+.flame{transform-origin:32px 34px;animation:fl 1.1s ease-in-out infinite alternate}
+@keyframes fl{from{transform:scale(1,.92) rotate(-3deg)}to{transform:scale(.92,1.08) rotate(3deg)}}
+.hint{font-size:1rem;margin-top:4px;min-height:3em;font-family:'Kalam',cursive;color:var(--gold2);padding:0 8px}
+.spark{position:absolute;left:50%;top:40%;width:7px;height:7px;border-radius:50%;background:var(--gold2);box-shadow:0 0 6px 2px #f2c14e;pointer-events:none;z-index:5;animation:burst .8s ease-out forwards}
+@keyframes burst{to{transform:translate(var(--x),var(--y)) scale(.2);opacity:0}}
+/* cards */
+.card{margin:16px 0;padding:16px 18px;background:linear-gradient(160deg,#7a1226aa,#4a0816cc);border:2px solid var(--gold);border-radius:16px;position:relative}
+.card::after{content:"♦";position:absolute;top:8px;right:14px;color:var(--gold);opacity:.7}
+.card h2{margin:0 0 4px;color:var(--gold);font-size:1.5rem;line-height:1.2}
+.card p{margin:4px 0}
+.card a{color:var(--gold2);font-weight:800}
+.big{font-family:'Kalam',cursive;font-size:1.35rem;font-weight:700;color:var(--cream)}
+.cd{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px;text-align:center}
+.cd div{background:var(--deep);border:1.5px solid var(--gold);border-radius:12px;padding:8px 0}
+.cd b{display:block;font-family:'Kalam',cursive;font-size:1.9rem;color:var(--gold);line-height:1.1}
+.cd span{font-size:.72rem;color:var(--gold2)}
+.fine{background:var(--gold);color:var(--deep);border-radius:10px;padding:8px 12px;font-weight:800;margin-top:8px}
+/* rsvp */
+
+label.q,.q{display:block;font-weight:800;margin:14px 0 6px;color:var(--gold2)}
+input[type=text]{width:100%;font:inherit;font-size:1rem;padding:12px;border-radius:12px;border:2px solid var(--gold);background:var(--deep);color:var(--cream)}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts input{position:absolute;opacity:0;pointer-events:none}
+.opts label{padding:9px 14px;border:2px solid var(--gold);border-radius:999px;font-weight:700;cursor:pointer;background:var(--deep)}
+.opts input:checked+label{background:var(--gold);color:var(--deep)}
+.opts input:focus-visible+label,input[type=text]:focus-visible,.btn:focus-visible,.pc:focus-visible{outline:3px solid var(--gold2);outline-offset:2px}
+.btn{display:block;text-align:center;text-decoration:none;margin-top:20px;padding:15px;border-radius:14px;background:linear-gradient(180deg,#14956f,#0b5a46);color:var(--gold2);border:2px solid var(--gold);font-weight:800;font-size:1.05rem;box-shadow:0 4px 14px #f2c14e55}
+.btn[aria-disabled=true]{background:#2c5a4c;color:#8fb5a8;border-color:#6b4a50;box-shadow:none;pointer-events:none}
+#roleBox[hidden],#ticket[hidden]{display:none}
+#ticket{margin-top:20px;text-align:center}
+.tk{background:var(--cream);color:var(--wine);border:4px double var(--wine);outline:3px solid var(--gold);border-radius:18px;padding:22px 16px;animation:pop .5s}
+@keyframes pop{from{transform:scale(.8) rotate(-4deg);opacity:0}}
+.tk .k{font-size:1.1rem}
+.tk .nm{font-family:'Kalam',cursive;font-size:2.2rem;font-weight:700;line-height:1.1;margin:4px 0}
+.tk .rl{display:inline-block;background:var(--wine);color:var(--gold);border-radius:999px;padding:6px 16px;font-weight:800;margin:8px 0}
+.tk small{display:block;color:#7a1226b0}
+.shot{font-size:.85rem;color:var(--gold2);margin-top:10px}
+footer{text-align:center;margin-top:28px;color:var(--gold2);font-family:'Kalam',cursive;font-size:1.2rem}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="sky" id="sky" aria-hidden="true"></div>
+<main>
+<section class="hero">
+  <div class="fan" aria-label="Playing cards with diyas">
+    <div class="pc c1" tabindex="0"><div class="in"><div class="back"><svg class="diya" viewBox="0 0 64 56"><use href="#d"/></svg></div><div class="face"><small>A</small>♥<small class="b">A</small></div></div></div>
+    <div class="pc c3" tabindex="0"><div class="in"><div class="back"><svg class="diya" viewBox="0 0 64 56"><use href="#d"/></svg></div><div class="face"><small>K</small>♠<small class="b">K</small></div></div></div>
+    <div class="pc c2" tabindex="0"><div class="in"><div class="back"><svg class="diya" viewBox="0 0 64 56"><use href="#d"/></svg></div><div class="face"><small>A</small>♦<small class="b">A</small></div></div></div>
+  </div>
+  <div class="hint" id="msg" aria-live="polite">Tap a card and see what it says</div>
+  <h1>Ek Diwali, Doston ke sath</h1>
+  <p>Wednesday, 4 Nov · 4 pm onwards · Just bring the vibe ✨</p>
+</section>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><g id="d">
+  <path class="flame" d="M32 8c6 8 9 13 4 20-2 3-6 3-8 0-5-7-1-12 4-20z" fill="#ffb21f"/>
+  <path class="flame" d="M32 17c3 4 4 7 2 10-1 2-4 2-4 0-1-3 0-5 2-10z" fill="#fff1b0"/>
+  <path d="M6 34h52c0 11-10 18-26 18S6 45 6 34z" fill="#f2c14e"/>
+  <path d="M10 38h44c-2 6-10 10-22 10s-20-4-22-10z" fill="#c98a1b"/>
+</g></defs></svg>
+
+<div class="card">
+  <h2>Countdown to the party</h2>
+  <div class="cd" id="cd" aria-live="off"><div><b id="dd">--</b><span>days</span></div><div><b id="hh">--</b><span>hours</span></div><div><b id="mm">--</b><span>mins</span></div><div><b id="ss">--</b><span>secs</span></div></div>
+</div>
+
+<div class="card">
+  <h2>When and where</h2>
+  <p class="big">Wednesday, 4 Nov, 4 pm onwards</p>
+  <p>Venue: <a href="https://maps.app.goo.gl/Kacvr4SGnWyVuz1p7?g_st=iw" target="_blank" rel="noopener">Casa de Correia</a> (tap for map 📍)</p>
+</div>
+
+<div class="card">
+  <h2>Party, games &amp; entry</h2>
+  <p>Diyas, good food, great company and a bunch of fun games. Winners take the prize money, everyone else takes home the memories. No stress, just vibe!</p>
+  <p class="fine">Entry fee: ₹200</p>
+</div>
+
+<div class="card">
+  <h2>Dress code</h2>
+  <p>Traditional wear is mandatory. Dress like it’s a festival, because it is! 🪔</p>
+  <p class="fine">Rulebreakers pay a ₹200 fine, and it all goes into the prize money!</p>
+</div>
+
+<div class="card">
+  <h2>Drinks</h2>
+  <p>Let’s keep it sober this time. Good vibes only 😉✨</p>
+</div>
+
+<div class="card" id="rsvp">
+  <h2>Are you in?</h2>
+  <label class="q" for="name">1. Name</label>
+  <input type="text" id="name" autocomplete="name" placeholder="Your name">
+
+  <div class="q" id="cq">2. Coming na?</div>
+  <div class="opts" role="radiogroup" aria-labelledby="cq">
+    <input type="radio" name="come" id="c1" value="Pakka"><label for="c1">Pakka</label>
+    <input type="radio" name="come" id="c2" value="Shayad"><label for="c2">Shayad</label>
+    <input type="radio" name="come" id="c3" value="Iss baar not possible"><label for="c3">Iss baar not possible</label>
+  </div>
+
+  <a class="btn" id="go" role="button" aria-disabled="true" target="_blank" rel="noopener">RSVP on WhatsApp</a>
+
+  <div id="ticket" hidden>
+    <div class="tk" id="tk"></div>
+    <div class="shot">Screenshot this card and flaunt it 📸</div>
+  </div>
+</div>
+
+<footer>Shubh Diwali! 🪔</footer>
+</main>
+
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i)};
+  var sky=$('sky');for(var i=0;i<16;i++){var s=document.createElement('i');s.style.left=(Math.random()*100)+'%';s.style.animationDuration=(7+Math.random()*8)+'s';s.style.animationDelay=(-Math.random()*12)+'s';sky.appendChild(s)}
+  // flip cards
+  var M=[['Ace of Hearts: the whole gang is coming. Are you? ❤️','Hearts say: good food, good friends, good vibes.'],['King of Spades: dress traditional and claim your crown 👑','Spades say: break the dress code and it’s a ₹200 fine 😉'],['Ace of Diamonds: the brightest diya in the room is you 🪔','Diamonds say: the prize money is waiting for a winner 💰']];
+  function burst(c){if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;for(var k=0;k<10;k++){var s=document.createElement('b');s.className='spark';var a=k/10*6.283,d=50+Math.random()*30;s.style.setProperty('--x',Math.cos(a)*d+'px');s.style.setProperty('--y',Math.sin(a)*d+'px');c.appendChild(s);setTimeout(s.remove.bind(s),900)}}
+  document.querySelectorAll('.pc').forEach(function(c,i){
+    var n=0;
+    var f=function(){c.classList.toggle('flip');if(c.classList.contains('flip')){$('msg').textContent=M[i][n++%M[i].length];burst(c)}else{$('msg').textContent='Tap a card and see what it says'}};
+    c.addEventListener('click',f);
+    c.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();f()}});
+  });
+  // countdown (4 Nov 2026, 4 pm IST)
+  var T=new Date('2026-11-04T16:00:00+05:30').getTime();
+  function tick(){
+    var d=T-Date.now();
+    if(d<=0){$('cd').innerHTML='<div style="grid-column:1/-1"><b>Party shuru! 🪔</b></div>';return}
+    var p=function(n){return String(n).padStart(2,'0')};
+    $('dd').textContent=Math.floor(d/864e5);
+    $('hh').textContent=p(Math.floor(d%864e5/36e5));
+    $('mm').textContent=p(Math.floor(d%36e5/6e4));
+    $('ss').textContent=p(Math.floor(d%6e4/1e3));
+  }
+  tick();setInterval(tick,1000);
+  var go=$('go');
+  function val(n){var e=document.querySelector('input[name='+n+']:checked');return e?e.value:''}
+  function update(){
+    var name=$('name').value.trim(),come=val('come');
+    var ok=name&&come;
+    if(!ok){go.setAttribute('aria-disabled','true');go.removeAttribute('href');return}
+    var msg='Hi! Ek Diwali, Doston ke sath RSVP 🪔\nName: '+name+'\nComing: '+come;
+    go.href='https://wa.me/919890740720?text='+encodeURIComponent(msg);
+    go.setAttribute('aria-disabled','false');
+  }
+  document.addEventListener('input',update);
+  document.addEventListener('change',update);
+  function esc(s){return s.replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  go.addEventListener('click',function(){
+    if(go.getAttribute('aria-disabled')==='true')return;
+    var name=$('name').value.trim(),come=val('come');
+    var no=come==='Iss baar not possible';
+    var title=no?'We’ll miss you 💛':come==='Pakka'?'Locked in! 🪔':'Maybe, and we’re hoping 🤞';
+    var r=no?'Next time, for sure!':come==='Pakka'?'Vibe level: 100% 🔥':'Vibe level: loading… ⏳';
+    $('tk').innerHTML='<div class="k">Ek Diwali, Doston ke sath</div><div class="nm">'+esc(name)+'</div><div>'+title+'</div><div class="rl">'+esc(r)+'</div><small>Wed, 4 Nov · 4 pm onwards · Casa de Correia</small>';
+    $('ticket').hidden=false;
+    $('ticket').scrollIntoView({behavior:'smooth',block:'center'});
+  });
+  update();
+})();
+</script>
+</body>
+</html>
